@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I'm Sorry, Love</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", Arial, sans-serif;
+    }
+
+```
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #ffd6e7, #ffe9f3, #fff6fb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+.hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  color: rgba(255, 105, 180, 0.35);
+  animation: floatUp linear infinite;
+  font-size: 20px;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 28px;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.2);
+  padding: 35px;
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.top-title {
+  font-size: 2.6rem;
+  color: #d63384;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #7a4b61;
+  margin-bottom: 25px;
+}
+
+.photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #ff9ac2;
+  box-shadow: 0 8px 25px rgba(214, 51, 132, 0.25);
+  margin-bottom: 20px;
+}
+
+.letter-box {
+  background: rgba(255, 240, 247, 0.95);
+  border: 2px solid #ffc1da;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: left;
+  line-height: 1.8;
+  color: #5e3a4c;
+  font-size: 1.05rem;
+  box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.2);
+  margin-bottom: 25px;
+}
+
+.typing {
+  border-right: 3px solid #d63384;
+  white-space: pre-line;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #ff4f93, #ff78ac);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 79, 147, 0.25);
+}
+
+.music-btn {
+  background: white;
+  color: #d63384;
+  border: 2px solid #ff9ac2;
+}
+
+.no-btn {
+  background: #ffe4ee;
+  color: #b03a6d;
+}
+
+.message {
+  margin-top: 25px;
+  font-size: 1.2rem;
+  color: #c2185b;
+  font-weight: bold;
+  min-height: 35px;
+}
+
+.reasons {
+  margin-top: 28px;
+  text-align: left;
+  background: rgba(255,255,255,0.7);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 0.95rem;
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <div class="container">
+    <h1 class="top-title">I'm Sorry, My Love</h1>
+    <p class="subtitle">A small webpage made from my heart, just for you.</p>
+
+```
+<img class="photo" src="us.jpg" alt="Our Photo">
+
+<div class="letter-box">
+  <div id="typingText" class="typing"></div>
+</div>
+
+<div class="buttons">
+  <button class="yes-btn" onclick="forgiveMessage()">Forgive Me 💖</button>
+  <button class="music-btn" onclick="toggleMusic()">Play Music 🎵</button>
+  <button class="no-btn" id="noBtn">Not Yet 😢</button>
+</div>
+
+<div class="message" id="message"></div>
+
+<div class="reasons">
+  <h3>Why I'm Saying Sorry</h3>
+  <ul>
+    <li>I know I made a mistake and I truly regret it.</li>
+    <li>You are very important to me, and I never want to hurt you.</li>
+    <li>I want to fix things, not just with words, but with actions too.</li>
+    <li>I miss your smile, your presence, and the peace you bring me.</li>
+    <li>I hope this little effort shows how sincere my apology is.</li>
+  </ul>
+</div>
+
+<p class="footer">Made with love, sincerity, and a hopeful heart. 💌</p>
+```
+
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="tahanan.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const text = `Hi Akii,
+
+I’m really sorry about yesterday. I didn’t mean for our plans not to push through. Some unexpected tasks came up from my groupmates, and I had to do them first.
+
+I truly didn’t want that to happen. I was really looking forward to playing with you and having our  bad talks—I honestly missed that so much.
+
+I’m also sorry for falling asleep on you. I know that wasn’t right, and I feel bad about it.
+
+Please know that none of it was intentional. I really value our time together, and I’ll do better next time.
+
+I love you so much, Akii. 💗`;
+
+    let index = 0;
+    const speed = 35;
+    const typingText = document.getElementById("typingText");
+
+    function typeWriter() {
+      if (index < text.length) {
+        typingText.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    typeWriter();
+
+    function forgiveMessage() {
+      document.getElementById("message").innerHTML =
+        "Thank you, love. I promise to do better and cherish you more. 💞";
+    }
+
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * 250) - 125;
+      const y = Math.floor(Math.random() * 120) - 60;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (!isPlaying) {
+        music.play();
+        isPlaying = true;
+      } else {
+        music.pause();
+        isPlaying = false;
+      }
+    }
+
+    function createHearts() {
+      const heartsContainer = document.getElementById("hearts");
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        heart.style.animationDuration = Math.random() * 4 + 4 + "s";
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 8000);
+      }, 300);
+    }
+
+    createHearts();
+  </script>
+
+</body>
+</html>
